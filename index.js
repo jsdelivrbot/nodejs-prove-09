@@ -13,7 +13,7 @@ app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
 app.get('/', function(request, response) {
-  response.render('pages/index');
+    response.sendFile('form.html', { root: __dirname + "/public" });
 });
 
 app.listen(app.get('port'), function() {
