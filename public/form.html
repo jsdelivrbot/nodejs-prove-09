@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Postage</title>
+</head>
+<body>
+<h2>Price calculator</h2>
+<form action="/getRate" method="post">
+    <label>Weight:
+        <input type="number" name="weight" min="1" max="3.5" value="1" step="0.5">
+    </label><br>
+    <label>Mail type:
+        <select id="type" name="type" onchange="changeMax();">
+            <option value="Letters (Stamped)">Letters (Stamped)</option>
+            <option value="Letters (Metered)">Letters (Metered)</option>
+            <option value="Large Envelopes (Flats)">Large Envelopes (Flats)</option>
+            <option value="Parcels">Parcels</option>
+        </select>
+    </label><br>
+    <input type="submit" value="Calculate">
+</form>
+<script>
+    function changeMax() {
+        var select = document.getElementById("type");
+        var valueOfSelect = select.options[select.selectedIndex].text;
+
+        switch (valueOfSelect)
+        {
+            case "Letters (Stamped)":
+            case "Letters (Metered)":
+                document.getElementsByName("weight")[0].setAttribute("max", 3.5);
+                if (document.getElementsByName("weight")[0].value > 3.5)
+                    document.getElementsByName("weight")[0].value = 3.5;
+                break;
+            case "Large Envelopes (Flats)":
+            case "Parcels":
+                document.getElementsByName("weight")[0].setAttribute("max", 13);
+                break;
+        }
+    }
+</script>
+</body>
+</html>
